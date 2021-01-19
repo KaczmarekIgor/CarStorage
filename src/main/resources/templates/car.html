@@ -12,24 +12,57 @@
     <br>
     Id:
     <td th:text="${car.getId()}"/>
+
     <br>
     Mark:
     <td th:text="${car.getName()}"/>
+
     <br>
     Model:
     <td th:text="${car.getModel()}"/>
+
     <br>
-    Color:
+    Price:
     <td th:text="${car.getPrice()}"/>
-
-    <p>----------------------------</p>
-    <p1>Delete vehicle from list:</p1>
-    <p></p>
-    <form th:action="@{/delete}" th:object="${request}" method="post">
-        Id: <input type="number" th:field="*{id}"><br>
-        <p><input type="submit" value="delete"></p>
-    </form>
-    <br>
-
 </tr>
 
+<p>----------------------------</p>
+<p1>Delete car from list:</p1>
+<p></p>
+<form th:action="@{/delete}" th:object="${request}" method="post">
+    Id: <input type="number" th:field="*{id}"><br>
+    <p><input type="submit" value="delete"></p>
+</form>
+<br>
+
+<p1>Add car to list</p1>
+<p></p>
+<form th:action="@{/add}" th:object="${request}" method="post">
+    Id: <input type="text" th:field="*{id}"><br>
+    Model: <input type="text" th:field="*{name}"><br>
+    Mark: <input type="text" th:field="*{model}"><br>
+    Price: <input type="text" th:field="*{price}"><br>
+    <input type="submit" value="add"><br>
+</form>
+<br>
+
+<p1>Clear List</p1>
+<form th:action="@{/clear}" method="post">
+    <input type="submit" value="clear" class="button"> <br>
+</form>
+
+<p1>Modify only price</p1>
+<form th:action="@{/changePrice}" th:object="${request}" method="post">
+    Id: <input type="text" th:field="*{id}"><br>
+    Set new Price:<input type="text" th:field="*{price}"><br>
+    <p><input type="submit" value="set Price"></p>
+</form>
+
+<p1>Get car by id</p1>
+<form th:action="@{/getForId}" th:object="${request}" method="get">
+    Id: <input type="text" th:field="*{id}"><br>
+    <p><input type="submit" value="search"></p>
+</form>
+
+</body>
+</html>
