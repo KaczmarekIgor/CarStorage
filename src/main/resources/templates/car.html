@@ -4,27 +4,25 @@
     <meta charset="UTF-8">
     <title>Car List</title>
 </head>
-<body>
-
-<h1>Car List</h1>
-
-<tr th:each="car : ${cars}">
-    <br>
-    Id:
-    <td th:text="${car.getId()}"/>
-
-    <br>
-    Mark:
-    <td th:text="${car.getName()}"/>
-
-    <br>
-    Model:
-    <td th:text="${car.getModel()}"/>
-
-    <br>
-    Price:
-    <td th:text="${car.getPrice()}"/>
-</tr>
+<body bgcolor="#f0ffff">
+<center>
+    <span style="font-size: xx-large">Car List</span>
+    <style>td, th {
+        border: 1px solid black;
+    } </style>
+    <table border="1" style="width: 500px; height: 150px;">
+        <td>Id</td>
+        <td>Name</td>
+        <td>Model</td>
+        <td>Price</td>
+        <tr th:each="car : ${cars}">
+            <td th:text="${car.getId()}"/>
+            <td th:text="${car.getName()}"/>
+            <td th:text="${car.getModel()}"/>
+            <td th:text="${car.getPrice()}"/>
+        </tr>
+    </table>
+</center>
 
 <p>----------------------------</p>
 <p1>Delete car from list:</p1>
