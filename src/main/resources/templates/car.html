@@ -9,6 +9,7 @@
             padding: 0;
             margin: 0;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
+            border-spacing: 15px;
         }
 
         table {
@@ -18,21 +19,24 @@
             transform: translate(-50%, -50%);
             border-collapse: collapse;
             width: 800px;
-            height: 200px;
-            border: 1px solid #bdc3c7;
+            height: 100px;
+            border: 3px solid #bdc3c7;
             box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
         }
 
         tr {
             transition: all .2s ease-in;
             cursor: pointer;
+            text-align: center;
+
         }
 
         th,
         td {
             padding: 12px;
-            text-align: left;
             border-bottom: 1px solid #ddd;
+            text-align: center;
         }
 
         header {
@@ -62,58 +66,80 @@
     </style>
 </head>
 <body bgcolor="#f0ffff">
-<h1>Car List</h1>
-<hr>
+<h1>Car List</h1><br>
+<br>
 
 <table>
     <tr>
         <td>Id</td>
+        <br>
         <td>Name</td>
+        <br>
         <td>Model</td>
+        <br>
         <td>Price</td>
+        <br>
     </tr>
     <tr th:each="car : ${cars}">
         <td th:text="${car.getId()}"/>
         <td th:text="${car.getName()}"/>
         <td th:text="${car.getModel()}"/>
         <td th:text="${car.getPrice()}"/>
+        <br>
     </tr>
+    <tr>
+        <br>
+        <td>Delete Car By Id</td>
+        <td>Add Car to List</td>
+        <td>Clear Page</td>
+        <td>Change Price</td>
+        <td>Get Car By Id</td>
+    </tr>
+    <center>
+        <tr>
+            <td>
+                <form th:action="@{/delete}" th:object="${request}" method="post">
+                    Id: <input type="number" th:field="*{id}">
+                    <input type="submit" value="delete">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form th:action="@{/add}" th:object="${request}" method="post">
+                    Id: <input type="text" th:field="*{id}"><br>
+                    Model: <input type="text" th:field="*{name}"><br>
+                    Mark: <input type="text" th:field="*{model}"><br>
+                    Price: <input type="text" th:field="*{price}"><br>
+                    <input type="submit" value="add"><br>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form th:action="@{/clear}" method="post">
+                    <input type="submit" value="clear" class="button"> <br>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form th:action="@{/changePrice}" th:object="${request}" method="post">
+                    Id: <input type="text" th:field="*{id}"><br>
+                    Set new Price:<input type="text" th:field="*{price}"><br>
+                    <p><input type="submit" value="set Price"></p>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form th:action="@{/getForId}" th:object="${request}" method="get">
+                    Id: <input type="text" th:field="*{id}"><br>
+                    <p><input type="submit" value="search"></p>
+                </form>
+            </td>
+        </tr>
+    </center>
 </table>
-<p>
-    Delete car from list:
-<form th:action="@{/delete}" th:object="${request}" method="post">
-    Id: <input type="number" th:field="*{id}">
-    <input type="submit" value="delete">
-</form>
-</p>
-<p></p>
-<p1>Add car to list</p1>
-
-<form th:action="@{/add}" th:object="${request}" method="post">
-    Id: <input type="text" th:field="*{id}"><br>
-    Model: <input type="text" th:field="*{name}"><br>
-    Mark: <input type="text" th:field="*{model}"><br>
-    Price: <input type="text" th:field="*{price}"><br>
-    <input type="submit" value="add"><br>
-</form>
-<br>
-
-<p1>Clear List</p1>
-<form th:action="@{/clear}" method="post">
-    <input type="submit" value="clear" class="button"> <br>
-</form>
-
-<p1>Modify only price</p1>
-<form th:action="@{/changePrice}" th:object="${request}" method="post">
-    Id: <input type="text" th:field="*{id}"><br>
-    Set new Price:<input type="text" th:field="*{price}"><br>
-    <p><input type="submit" value="set Price"></p>
-</form>
-
-<p1>Get car by id</p1>
-<form th:action="@{/getForId}" th:object="${request}" method="get">
-    Id: <input type="text" th:field="*{id}"><br>
-    <p><input type="submit" value="search"></p>
-</form>
 </body>
 </html>
